@@ -23,6 +23,7 @@ public class Main {
         int attempts = 6;
 
         String nw_word = game_word;
+        System.out.println("Welcome to Hangman");
          while (attempts != 0 && !IsGuessedFully(display)){
             char guess = GetUserGuess();
             if (IsCorrect(guess, nw_word)){
