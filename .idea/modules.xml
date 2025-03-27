@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/hangman/hangman.iml" filepath="$PROJECT_DIR$/hangman/hangman.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/java_mini_projects.iml" filepath="$PROJECT_DIR$/.idea/java_mini_projects.iml" />
       <module fileurl="file://$PROJECT_DIR$/mastermind/mastermind.iml" filepath="$PROJECT_DIR$/mastermind/mastermind.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tictactoe/tictactoe.iml" filepath="$PROJECT_DIR$/tictactoe/tictactoe.iml" />
     </modules>
   </component>
 </project>

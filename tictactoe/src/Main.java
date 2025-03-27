@@ -6,45 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         List<String> board = createBoard();
-
         List<String> moves = playerMoves();
         List<String> names = playerNames();
-        int turnIdx = 0;
-        int turns = 0;
-        while (turns <= 9) {
-            System.out.println();
-            System.out.println("You : X         Computer : O");
-            System.out.println();
-            displayBoard(board);
-            if (turnIdx == 2) {
-                turnIdx = 0;
-            }
-            String currentPlayer = names.get(turnIdx);
-            System.out.println();
-            if (currentPlayer.contains("Computer")) {
-                try {
-                    System.out.println("Computer is thinking........");
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    System.out.println("Thread was interrupted.");
-                }
-                String move = computerPlay(moves);
-                addMoveToBoard('O', board, move);
-            } else {
-                String move = humanPlay(moves);
-                addMoveToBoard('X', board, move);
-            }
-
-            turnIdx++;
-            turns ++;
-
-            String isWinner = checkWinner(board);
-            if (isWinner != "None"){
-                System.out.println(isWinner + " WON!!!");
-                break;
-            }
-
-        }
+        playGame(board, names, moves);
         if (checkWinner(board) == "None"){
             System.out.println("Draw");
         }
@@ -136,7 +100,6 @@ public class Main {
 
     public static String checkWinner(List<String> board) {
         String pawn = "None";
-
         // Check rows
         int idxRowMove1 = 3;
         int idxRowMove2 = 9;
@@ -179,6 +142,50 @@ public class Main {
         }
 
         return pawn;
+
+    }
+
+    public static void playGame(List <String> board, List<String> names, List<String> moves){
+        int turns = 0;
+        int turnIdx = 0;
+
+        while (turns <= 9) {
+            System.out.println();
+            System.out.println("You : X         Computer : O");
+            System.out.println();
+            displayBoard(board);
+            if (turnIdx == 2) {
+                turnIdx = 0;
+            }
+            String currentPlayer = names.get(turnIdx);
+            System.out.println();
+            humanVsComputer(moves, board, currentPlayer);
+            turnIdx++;
+            turns ++;
+
+            String isWinner = checkWinner(board);
+            if (isWinner != "None"){
+                System.out.println(isWinner + " WON!!!");
+                break;
+            }
+
+        }
+    }
+
+    public static void humanVsComputer(List<String> moves, List<String> board, String currentPlayer){
+        if (currentPlayer.contains("Computer")) {
+            try {
+                System.out.println("Computer is thinking........");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println("Thread was interrupted.");
+            }
+            String move = computerPlay(moves);
+            addMoveToBoard('O', board, move);
+        } else {
+            String move = humanPlay(moves);
+            addMoveToBoard('X', board, move);
+        }
 
     }
 }
