@@ -12,6 +12,8 @@ public class Main {
         if (checkWinner(board) == "None"){
             System.out.println("Draw");
         }
+        System.out.println();
+        displayBoard(board);
         System.out.println("Game Over");
     }
 
@@ -98,7 +100,9 @@ public class Main {
         }
     }
 
+
     public static String checkWinner(List<String> board) {
+
         String pawn = "None";
         // Check rows
         int idxRowMove1 = 3;
@@ -115,18 +119,18 @@ public class Main {
         }
 
         // Check columns
-        int idxColumnMove1 = 3;
-        int idxColumnMove2 = 9;
-        int idxColumnMove3 = 15;
+        ArrayList<Integer> rows = new ArrayList<Integer>();
+        rows.add(idxRowMove1);
+        rows.add(idxRowMove2);
+        rows.add(idxRowMove3);
 
-        for (int j = 0; j < board.size(); j++) {
-            if (j % 2 != 0) {
-                if (board.get(j).charAt(idxColumnMove1) == board.get(j).charAt(idxColumnMove2) && board.get(j).charAt(idxColumnMove2) == board.get(j).charAt(idxColumnMove3)) {
-                    char move = board.get(idxColumnMove1).charAt(j);
-                    return String.valueOf(move);
-                }
+        for (int row : rows){
+            if (board.get(1).charAt(row) == board.get(3).charAt(row) && board.get(3).charAt(row) == board.get(5).charAt(row)) {
+                char move = board.get(1).charAt(row);
+                return String.valueOf(move);
             }
         }
+
 
         // Check diagonals
         if (board.get(1).charAt(idxRowMove1) == board.get(3).charAt(idxRowMove2) && board.get(5).charAt(idxRowMove3) == board.get(3).charAt(idxRowMove2)) {
@@ -161,7 +165,7 @@ public class Main {
             System.out.println();
             humanVsComputer(moves, board, currentPlayer);
             turnIdx++;
-            turns ++;
+            turns --;
 
             String isWinner = checkWinner(board);
             if (isWinner != "None"){
@@ -176,7 +180,7 @@ public class Main {
         if (currentPlayer.contains("Computer")) {
             try {
                 System.out.println("Computer is thinking........");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Thread was interrupted.");
             }
